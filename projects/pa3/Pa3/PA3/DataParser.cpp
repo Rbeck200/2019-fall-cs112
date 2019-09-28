@@ -1,6 +1,7 @@
 #include "DataParser.h"
 using namespace std;
 
+//Removes the selected color from each "pixel" in the .ppm file
 void DataParser(vector<string>& vect, const char& remove_Color) {
 
 	vector<int> data{};
@@ -14,16 +15,22 @@ void DataParser(vector<string>& vect, const char& remove_Color) {
 
 			for (size_t i = 3; i < vect.size(); i++) {
 
+				//counter to see what pixel its on
 				int _counter = 0;
+				//string that is new line made
 				string _new_line;
 
+				//PLug each vector line into an istringstream to seperate it
 				istringstream line{ vect[i] };
+
 				while (line.good() == true) {
 
+					//temporary string
 					string temp;
+					//Get each individual pixel seperated by spaces
 					getline(line, temp, ' ');
 
-					//if nothing in temp or if space
+					//if nothing in temp or if space do nothing, i.e. go to next in file
 					if (temp.length() == 0 || temp == " ") {
 
 					}else{
