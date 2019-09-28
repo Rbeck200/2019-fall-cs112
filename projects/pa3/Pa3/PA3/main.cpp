@@ -9,6 +9,7 @@
 #include <sstream>
 #include <exception>
 #include <vector>
+#include <iomanip>
 #include "FileReader.h"
 #include "DataParser.h"
 using namespace std;
@@ -16,18 +17,24 @@ using namespace std;
 int main()
 {
 	try {
+		// temporary name for the input file
 		string temp_file;
+		// temporary name for the new output file
 		string new_name;
+		// first letter of color to remove
 		char color_to_remove = 'r';
 
+		//Prompt user for input file
 		cout << "Please enter source file name: ";
 		cin >> temp_file;
 		cout << endl;
 
+		//Prompt user for color to remove
 		cout << "Please enter a color to remove\n"
 			<< "(Choices are r, g, b.): ";
 		cin >> color_to_remove;
 
+		//Prompt user for new file name
 		cout << "Please enter what you want your new file to be named" <<
 			endl << "(We only save as .ppm.)";
 		cin >> new_name;
@@ -35,6 +42,7 @@ int main()
 		// get the lines from the file into a vector
 		vector<string> lines = file_reader(temp_file);
 
+		//Error check
 		if (lines.size() == 0) {
 			throw "File was not found.";
 		}else if (color_to_remove == ' ') {
@@ -52,7 +60,7 @@ int main()
 			cout << lines[i] << endl;
 		}*/
 
-
+		//write every line by each line to a new file name given by the user
 		ofstream save_As{ new_name };
 		for (int i = 0; i < lines.size(); i++) {
 
@@ -64,6 +72,7 @@ int main()
 
 	}
 
+	//catches all of my errors 
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}
@@ -72,4 +81,3 @@ int main()
 
 
 	
-
